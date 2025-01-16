@@ -1,0 +1,86 @@
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials"/>
+    <link rel="apple-touch-icon" href="/iconx/apple-touch-icon.png">
+    <meta name="mobile-web-app-capable" content="yes">
+</head>
+
+<body>
+
+<button id="install" class="install">install</button>
+
+<audio id="audioPlayer" src="white-noise.mp3"></audio>
+<button id="playPauseButton">Start</button>
+
+<style>
+    #playPauseButton {
+        height: 100vh;
+        width: 100vw;
+        font-weight: bold;
+        font-size: 50;
+    }
+    html, body {
+        margin: 0px;
+        padding: 0px;
+    }
+
+
+</style>
+
+<script>
+    let installPrompt = null;
+    const installButton = document.getElementById("install");
+
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseButton = document.getElementById('playPauseButton');
+    playPauseButton.addEventListener('click', () => {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playPauseButton.textContent = 'Stop';
+        } else {
+            audioPlayer.pause();
+            playPauseButton.textContent = 'Start';
+        }
+    });
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault()
+        installPrompt = event;
+        installButton.style.display = "block"
+    });
+
+    installButton.addEventListener("click", async () => {
+        const result = await installPrompt.prompt();
+    });
+</script>
+<style>
+    .barrier {
+        position: fixed;
+        width: 30vw;
+        bottom: 15px;
+        right: 15px;
+        border-radius: 25px;
+    }
+
+    .install {
+        display: none;
+        position: fixed;
+        width: 90vw;
+        top: 30px;
+        left: 5vw;
+
+        background-color: #1b4e0a; /* Green */
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 20px;
+    }
+</style>
+
+</body>
+</html>
