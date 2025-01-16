@@ -55,6 +55,16 @@
         const result = await installPrompt.prompt();
     });
 </script>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/nois/service-worker.js")
+            .then(() => console.log("Service Worker registered"))
+            .catch((error) => console.error("Service Worker registration failed:", error));
+    }
+</script>
+
+
 <style>
     .barrier {
         position: fixed;
