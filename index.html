@@ -37,6 +37,7 @@
     playPauseButton.addEventListener('click', () => {
         if (audioPlayer.paused) {
             audioPlayer.play();
+            audioPlayer.loop = true
             playPauseButton.textContent = 'Stop';
         } else {
             audioPlayer.pause();
